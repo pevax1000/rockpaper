@@ -6,12 +6,11 @@
     <title>Document</title>
 </head>
 <body>
-    <button id = "Rock">Rock</button>
-    <button id = "Paper">Paper</button>
-    <button id = "Scissors">Scissors</button>
+    <button id = "rock">Rock</button>
+    <button id = "paper">Paper</button>
+    <button id = "scissors">Scissors</button>
     <div> 
-       <ul>
-        FUCK
+       <ul id="results">
        </ul>
     </div>
 
@@ -25,14 +24,12 @@
     let computerPoints = 0;
     
     const buttons = document.querySelectorAll("button")
-    const section = document.querySelector("div")
-    const results = document.querySelector("ul")
+    const results = document.querySelector("#results")
+
 
     buttons.forEach((button) => {
         button.addEventListener("click", () => {
-        console.log(button.id)
-        const choice = document.createElement("li")
-        lhumanChoice = button.innerHTML;
+        lhumanChoice = button.id.toLowerCase();
         playRound()
     })
 })
@@ -54,33 +51,56 @@
         // };
 
         function getResult() {
+            const resultMessage = document.createElement("li");
+            
             if (lhumanChoice === computerChoice) {
-                alert(`It's a draw! Both chose ${computerChoice}`);
+                resultMessage.textContent = (`It's a draw! Both chose ${computerChoice}`);
             }
             else if (
                 (lhumanChoice === "rock" && computerChoice === "scissors") ||
                 (lhumanChoice === "paper" && computerChoice === "rock") ||
                 (lhumanChoice === "scissors" && computerChoice === "paper")
             ) {
-                alert(`You win! ${lhumanChoice} beats ${computerChoice}`);
+                resultMessage.textContent = `You win! ${lhumanChoice} beats ${computerChoice}`;
                 userPoints++; 
             } 
             else {
-                alert(`You lost! ${computerChoice} beats ${lhumanChoice}`);
+                resultMessage.textContent = `You lose! ${computerChoice} beats ${lhumanChoice}`;
                 computerPoints++; 
             }
+            
+            results.appendChild(resultMessage); // Append the result to the list
+            const score = document.createElement("li");
+            score.textContent = `Human points ${userPoints} computer points ${computerPoints}`;
+            results.appendChild(score)
+            
         } 
 
         function playRound() {
             getComputerChoice(); 
-            alert(computerChoice);
             getResult();
+            if (userPoints > 5) {
+                alert("You win!")
+                newRound()
+            }
+            if (computerPoints > 5) {
+                alert("Computer wins!")
+                newRound()
+            }
+     
         }
 
-        // function playGame() {
-        //     for (let i = 1; i <= 5; i++) {
-        //         playRound();
-        //     }
+        function newRound() {
+            computerPoints = 0
+            userPoints = 0
+            results.innerHTML = ""
+
+        }
+
+//         function playGame() {
+//         for (let i = 1; i <= 5; i++) {
+//           playRound();
+//    }
         //     if (userPoints < computerPoints) {
         //         alert("you lost the game");
         //     }

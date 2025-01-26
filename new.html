@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+</head>
+<body>
+    <button id="rock">Rock</button>
+    <button id="paper">Paper</button>
+    <button id="scissors">Scissors</button>
+    <div>
+        <ul id="results">
+            <!-- Results will be displayed here -->
+        </ul>
+    </div>
+
+    <script>
+        let computerChoice;
+        let lhumanChoice;
+        let userPoints = 0;
+        let computerPoints = 0;
+
+        const buttons = document.querySelectorAll("button");
+        const results = document.querySelector("#results");
+
+        buttons.forEach((button) => {
+            button.addEventListener("click", () => {
+                lhumanChoice = button.id;
+                playRound();
+            });
+        });
+
+        function getComputerChoice() {
+            const randomNum = Math.random();
+
+            if (randomNum <= 0.3333333) {
+                computerChoice = "rock";
+            } else if (randomNum <= 0.6666666) {
+                computerChoice = "paper";
+            } else {
+                computerChoice = "scissors";
+            }
+        }
+
+        function getResult() {
+            const resultMessage = document.createElement("li");
+
+            if (lhumanChoice === computerChoice) {
+                resultMessage.textContent = `It's a draw! Both chose ${computerChoice}`;
+            } else if (
+                (lhumanChoice === "rock" && computerChoice === "scissors") ||
+                (lhumanChoice === "paper" && computerChoice === "rock") ||
+                (lhumanChoice === "scissors" && computerChoice === "paper")
+            ) {
+                resultMessage.textContent = `You win! ${lhumanChoice} beats ${computerChoice}`;
+                userPoints++;
+            } else {
+                resultMessage.textContent = `You lose! ${computerChoice} beats ${lhumanChoice}`;
+                computerPoints++;
+            }
+
+            results.appendChild(resultMessage); // Append the result to the list
+        }
+
+        function playRound() {
+            getComputerChoice();
+            getResult();
+        }
+    </script>
+</body>
+</html>
