@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id = "Rock">Rock</button>
+    <button id = "Paper">Paper</button>
+    <button id = "Scissors">Scissors</button>
+    <div> 
+       <ul>
+        FUCK
+       </ul>
+    </div>
+
+    <script>
+
+    let ComputerNumber;
+    let computerChoice;
+    let humanChoice;
+    let lhumanChoice;
+    let userPoints = 0;
+    let computerPoints = 0;
+    
+    const buttons = document.querySelectorAll("button")
+    const section = document.querySelector("div")
+    const results = document.querySelector("ul")
+
+    buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+        console.log(button.id)
+        const choice = document.createElement("li")
+        lhumanChoice = button.innerHTML;
+        playRound()
+    })
+})
+
+     function getComputerChoice() {
+        ComputerNumber = Math.random()
+        
+        if (ComputerNumber <= 0.3333333) {
+            computerChoice = ("rock");
+        }
+        else if (ComputerNumber <= 0.66666) {
+            computerChoice = ("paper");
+        } 
+        else computerChoice = ("scissors");
+        };
+        
+        // function getHumanChoice() {
+        //     lhumanChoice = button.id;
+        // };
+
+        function getResult() {
+            if (lhumanChoice === computerChoice) {
+                alert(`It's a draw! Both chose ${computerChoice}`);
+            }
+            else if (
+                (lhumanChoice === "rock" && computerChoice === "scissors") ||
+                (lhumanChoice === "paper" && computerChoice === "rock") ||
+                (lhumanChoice === "scissors" && computerChoice === "paper")
+            ) {
+                alert(`You win! ${lhumanChoice} beats ${computerChoice}`);
+                userPoints++; 
+            } 
+            else {
+                alert(`You lost! ${computerChoice} beats ${lhumanChoice}`);
+                computerPoints++; 
+            }
+        } 
+
+        function playRound() {
+            getComputerChoice(); 
+            alert(computerChoice);
+            getResult();
+        }
+
+        // function playGame() {
+        //     for (let i = 1; i <= 5; i++) {
+        //         playRound();
+        //     }
+        //     if (userPoints < computerPoints) {
+        //         alert("you lost the game");
+        //     }
+        //     else alert("You won the game!");
+        //     };
+
+        // playGame()
+
+
+
+    </script>
+</body>
+</html>
+
+
+<!-- // Rock paper siessor
+/// Get computer choice
+//// Get human choice - prompt
+// Compare human to computer
+
+////- If Human =
+//human: rock, computer: paper = you lose
+///human: scissors, computer rock = you lose
+h//uman: paper, computer: paper = you lose
+ -->
+
+<!-- g -->
